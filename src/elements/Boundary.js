@@ -8,35 +8,32 @@ class Boundary extends GameElement {
     }
 
     collideWith(player, velocity) {
-        const padding = 3;
         const [vX, vY] = velocity;
+        const margin = 1;
         const x = player.getX();
         const y = player.getY();
-        const radius = player.getRadius()+padding;
+        const radius = player.getRadius();
+
+        const rectWidth = this.getWidth()+ margin*2;
+        const rectHeight = this.getHeight() + margin*2;
 
         if(player.getType() === "ghost" && this.getType() === "verticalSpawn")
             return false;
 
-        let distX = Math.abs(x + vX - this.getX() - this.getWidth() / 2);
-        let distY = Math.abs(y + vY - this.getY() - this.getHeight() / 2);
+        let distX = Math.abs(x - this.getX() + vX -rectWidth / 2);
+        let distY = Math.abs(y - this.getY() + vY - rectHeight / 2);
 
-        if (distX > (this.getWidth() / 2 + radius)) {
-            return false;
-        }
-        if (distY > (this.getHeight() / 2 + radius)) {
+        if (distX > rectWidth / 2 + radius || distY > rectHeight / 2 + radius) {
             return false;
         }
 
-        if (distX <= (this.getWidth() / 2)) {
-            return true;
-        }
-        if (distY <= (this.getHeight() / 2)) {
+        if (distX <= rectWidth / 2 || distY <= rectHeight / 2) {
             return true;
         }
 
-        let dx = distX - this.getWidth() / 2;
-        let dy = distY - this.getHeight() / 2;
-        return (dx * dx + dy * dy <= (radius * radius));
+        let dx = distX - rectWidth / 2;
+        let dy = distY - rectHeight / 2;
+        return dx * dx + dy * dy <= radius * radius;
     }
 
     getType() {

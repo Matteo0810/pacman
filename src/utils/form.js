@@ -1,4 +1,4 @@
-const G_FORM_ID = "1-iD9QwsabldSC2bfAiKcAmvWEarniAspTzpvytoGVkI";
+const G_FORM_ID = "1FAIpQLSfRvX5MvjjHwGEqwD83oZek-dRW9tfBJ5SQjMmptlYMq9UScw";
 
 const G_FIELD_EMAIL_ID = "1359740161";
 const G_FIELD_SCORE_ID = "2021428930";
@@ -15,7 +15,7 @@ function createForm() {
         .onsubmit = async event => {
             event.preventDefault();
             const formData = new FormData();
-            const emailField = document.querySelector('[name="email"]');
+            let emailField = document.querySelector('[name="email"]');
             if(!emailField)
                 return;
             const email = emailField.value;
@@ -26,15 +26,15 @@ function createForm() {
             formData.append(`entry.${G_FIELD_EMAIL_ID}`, email);
             formData.append(`entry.${G_FIELD_SCORE_ID}`, score);
 
-            const response = await fetch(
-                `https://docs.google.com/forms/d/e/1FAIpQLSfRvX5MvjjHwGEqwD83oZek-dRW9tfBJ5SQjMmptlYMq9UScw/formResponse`,
-                { method: "POST" }
-            );
-            console.log(response.status)
-            if(response.status === 200) {
-                event.target.insertAdjacentHTML("beforeend", "<p>Score envoyé !</p>");
-                setTimeout(() => document.querySelector("p").remove(), 1e3);
-                event.target.clear();
-            }
+            event.target.insertAdjacentHTML("beforeend", "<p>Score envoyé !</p>");
+            setTimeout(() => document.querySelector("p").remove(), 1e3);
+            emailField.value = "";
+            await fetch(
+                `https://docs.google.com/forms/d/e/${G_FORM_ID}/formResponse`,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            ); // même si une erreur apparaît, ça fonctionne quand même
         }
 }

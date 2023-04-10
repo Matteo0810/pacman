@@ -1,16 +1,14 @@
-const DIRECTION_LEFT = "left";
-const DIRECTION_RIGHT = "right";
-const DIRECTION_UP = "up";
-const DIRECTION_DOWN = "down";
-
 class Ghost extends Player {
 
     constructor(x, y, color) {
         super(x, y, "ghost");
         this._color = color;
 
-        this._lastDirection = DIRECTION_UP;
+        this._lastDirection = DIRECTION_RIGHT;
+        this._isGoingOut = false;
         this._vulnerable = false;
+
+        this.goOut();
     }
 
     setVulnerable(vulnerable) {
@@ -18,11 +16,43 @@ class Ghost extends Player {
     }
 
     isVulnerable() {
-        return this._vulnerable;
+        return this._vulnerable && !ghostKilled.includes(this);
     }
 
     goToHome() {
-        // TODO les faire revenir au point de départ
+        this.setToInitialPosition();
+        this.goOut();
+    }
+
+    goOut() {
+        this._isGoingOut = true;
+        if(this._color === COLORS.RED ||this._color === COLORS.ORANGE) {
+            this.setVelocityY(-this.getSpeed());
+            setTimeout(() => {
+                this.setVelocityY(0);
+                this._isGoingOut = false;
+            }, 420);
+        } else if(this._color === COLORS.PINK) {
+            this.setVelocityX(-this.getSpeed());
+            setTimeout(() => {
+                this.setVelocityX(0);
+                this.setVelocityY(-this.getSpeed());
+                setTimeout(() => {
+                    this.setVelocityY(0);
+                    this._isGoingOut = false;
+                }, 420);
+            }, 300);
+        } else if(this._color === COLORS.BLUE) {
+            this.setVelocityX(this.getSpeed());
+            setTimeout(() => {
+                this.setVelocityX(0);
+                this.setVelocityY(-this.getSpeed());
+                setTimeout(() => {
+                    this.setVelocityY(0);
+                    this._isGoingOut = false;
+                }, 420);
+            }, 300);
+        }
     }
 
     getCollisions() {
@@ -44,11 +74,9 @@ class Ghost extends Player {
 
 
     getRandomDirection() {
-        const directions = [DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_DOWN];
-        const randomIndex = Math.floor(Math.random() * directions.length);
-        return directions[randomIndex];
+        const randomIndex = Math.floor(Math.random() * DIRECTIONS.length);
+        return DIRECTIONS[randomIndex];
     }
-
     getOppositeDirection(direction) {
         switch (direction) {
             case DIRECTION_LEFT:
@@ -68,11 +96,10 @@ class Ghost extends Player {
         const collisions = this.getCollisions();
         let direction = this.getRandomDirection();
 
-        if(!collisions.includes(this._lastDirection))
+        if (!collisions.includes(this._lastDirection))
             direction = this._lastDirection;
-
         while (collisions.includes(direction)) {
-            let availableDirections = [DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_DOWN].filter((dir) => !collisions.includes(dir));
+            let availableDirections = DIRECTIONS.filter((dir) => !collisions.includes(dir));
             availableDirections = availableDirections.filter((dir) => dir !== this.getOppositeDirection(this._lastDirection));
             if (availableDirections.length > 0)
                 direction = availableDirections[Math.floor(Math.random() * availableDirections.length)];
@@ -84,6 +111,8 @@ class Ghost extends Player {
     }
 
     move() {
+        if(this._isGoingOut)
+            return;
         const VELOCITY = this.getSpeed();
         const direction = this.getGhostMove();
         switch(direction) {
@@ -104,6 +133,7 @@ class Ghost extends Player {
                 this.setVelocityX(0);
                 break;
         }
+
         this._lastDirection = direction;
     }
 
@@ -123,7 +153,7 @@ class Ghost extends Player {
     draw(context) {
         context.beginPath();
         context.arc(this.getX(), this.getY(), this.getRadius(), 0, Math.PI*2);
-        screen.useColor(this._color);
+        screen.useColor(this.isVulnerable() ? "#2121ff" : this._color);
         context.fill();
         context.closePath();
     }

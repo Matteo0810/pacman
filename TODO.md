@@ -8,11 +8,10 @@
 - [x] : faire rejouer
 - [x] : faire fonctionner le formulaire
 - [x] : faire marcher le power-up
-- [x] : responsive
-  
+- [x] : responsive du canvas
+- [x] : réparer l'IA des fantômes
+- [x] : rajouter que les fantomes retournes à la maison quand ils sont mangés
+- [x] : réparer collisions si pas flemme 
+
 ## À faire
-- [ ] : mettre un sprite sur pacman et les fantomes
-- [ ] : rajouter des animations
-- [ ] : réparer l'IA des fantômes
-- [ ] : réparer collisions si pas flemme
-- [ ] : rajouter que les fantomes retournes à la maison quand ils sont mangés
+- [ ] : responsive du formulaire

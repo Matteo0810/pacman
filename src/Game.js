@@ -69,6 +69,7 @@ function update() {
                 ghostKilled = [];
                 setTimeout(() => {
                     ghosts.forEach(ghost => ghost.setVulnerable(false));
+                    ghostKilled = [];
                 }, POWER_UP_DURATION);
             }
             score+=10;
@@ -80,7 +81,7 @@ function update() {
 
     for (const ghost of ghosts) {
         if(ghost.collideWith(pacman)) {
-            if(ghost.isVulnerable() && !ghostKilled.includes(ghost)) {
+            if(ghost.isVulnerable()) {
                 ghost.goToHome();
                 const won = 200+(ghostKilled.length+1)
                 score+=won;
@@ -91,11 +92,10 @@ function update() {
             break;
         }
 
+        ghost.update(context);
         ghost.detectTeleportation();
     }
     pacman.detectTeleportation();
-
-    ghosts.forEach(ghost => ghost.update(context));
     pacman.update(context);
 }
 
@@ -104,7 +104,6 @@ function start() {
         level++;
         dots = [...originalDots];
         pacman.setToInitialPosition();
-        // TODO augmenter la speed des fantomes?
         start();
         return;
     } else if(isDead) {

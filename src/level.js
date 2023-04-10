@@ -6,9 +6,9 @@ const map = [
     ['|l', '.', '[', ']', '.', '[', ']', '.', 'b', '.', '[', ']', '.', 'b', '.', '|r'],
     ['|l', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|r'],
     ['12', 'g', 'g', '2', '.', '[', 'm', 'm', 'm', 'm', ']', '.', '1', 'g', 'g', '13'],
-    ['  ', ' ', ' ', '|r', '.', '.', '.', '.', '.', '.', '.', '.', '|l', ' ', ' ', ' '],
+    ['  ', ' ', ' ', '|r', '.', '.', '.', ' ', '.', '.', '.', '.', '|l', ' ', ' ', ' '],
     ['k', 'k', 'k', '4', '.', '7', 'g', 't', 't', 'g', '6', '.', '3', 'k', 'k', 'k'],
-    [' ', ' ', ' ', ' ', '.', '|l', 'bl', 'pi', 'r', 'o', '|r', '.', ' ', ' ', '  ', ' '],
+    [' ', ' ', ' ', ' ', '.', '|l', 'bl', 'r', 'o', 'pi', '|r', '.', ' ', ' ', '  ', ' '],
     ['g', 'g', 'g', '2', '.', '8', 'k', 'k', 'k', 'k', '5', '.', '1', 'g', 'g', 'g'],
     ['  ', ' ', ' ', '|r', '.', '.', '.', '.', '.', '.', '.', '.', '|l', ' ', ' ', ' '],
     ['15', 'k', 'k', '4', '.', '16', '.', '[', '18', '.', '16', '.', '3', 'k', 'k', '14'],
@@ -137,16 +137,16 @@ map.forEach((row, i) => {
                 pacman = new Pacman(j, i);
                 break;
             case "r":
-                ghosts.push(new Ghost(j, i, "#de0602"));
+                ghosts.push(new Ghost(j, i, COLORS.RED));
                 break;
             case "pi":
-                ghosts.push(new Ghost(j, i, "#e696c2"));
+                ghosts.push(new Ghost(j, i, COLORS.PINK));
                 break;
             case "bl":
-                ghosts.push(new Ghost(j, i, "#09b4da"));
+                ghosts.push(new Ghost(j, i, COLORS.BLUE));
                 break;
             case "o":
-                ghosts.push(new Ghost(j, i, "#e49601"));
+                ghosts.push(new Ghost(j, i, COLORS.ORANGE));
                 break;
             case ".":
                 dots.push(new Dot(j, i));
