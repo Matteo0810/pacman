@@ -27,7 +27,7 @@ function createForm() {
             formData.append(`entry.${G_FIELD_SCORE_ID}`, score);
 
             const response = await fetch(
-                `https://docs.google.com/forms/d/e/${G_FORM_ID}/formResponse%27`,
+                `https://docs.google.com/forms/d/e/1FAIpQLSfRvX5MvjjHwGEqwD83oZek-dRW9tfBJ5SQjMmptlYMq9UScw/formResponse`,
                 { method: "POST" }
             );
             console.log(response.status)
