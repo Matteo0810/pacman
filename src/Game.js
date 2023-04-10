@@ -11,7 +11,10 @@ let ghostKilled;
 
 function initGame() {
     pacman.setToInitialPosition();
-    ghosts.forEach(ghost => ghost.setToInitialPosition());
+    ghosts.forEach(ghost => {
+        ghost.setToInitialPosition();
+        ghost.goOut();
+    });
     level=1;
     score=0;
     life=MAX_LIFE;
@@ -50,12 +53,6 @@ function drawEnd() {
     screen.drawText(`Score final: ${score}`, 25, "white", 120, 370);
 
     createForm();
-
-    const button = new Button("Rejouer ?", "white", 100, 100);
-    button
-        .setPosition(200, 500)
-        .click(screen.getCanvas(), initGame)
-        .draw(screen);
 }
 
 function update() {

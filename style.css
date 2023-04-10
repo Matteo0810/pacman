@@ -34,6 +34,7 @@ canvas {
 
 form {
     position: absolute;
+    top: 48%;
 
 }
 form>input[type="email"] {
@@ -73,11 +74,18 @@ form>button {
         width: 400px;
         height: 616px;
     }
+    form>input[type="email"],
+    form>button {
+        font-size: .5em;
+    }
 }
 @media screen and (max-width: 398px) {
     canvas {
         width: 100%;
         height: 526px;
+    }
+    form {
+        top: 48%;
     }
 }
 @media screen and (max-width: 350px) {
