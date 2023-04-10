@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'pacfont';
+    src: url('src/assets/fonts/pacfont.ttf');
+}
+
+*, *::before, *::after {
+    outline: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222;
+
+    height: 100vh;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+p {
+    font-family: "pacfont", sans-serif;
+    color: white;
+
+    text-align: center;
+    margin-top: 11px;
+}
+
+canvas {
+    border-radius: 20px;
+    position: relative;
+}
+
+form {
+    position: absolute;
+
+}
+form>input[type="email"] {
+    padding: 12px 14px;
+    font-size: .7em;
+
+    border: 2px solid white;
+    color: white;
+    background-color: transparent;
+    display: block;
+
+    font-family: "pacfont", sans-serif;
+}
+form>input#email::placeholder {
+    font-size: .6em;
+}
+form>button {
+    font-family: "pacfont", sans-serif;
+    width: 100%;
+    padding: 10px 10px;
+    margin-top: 16px;
+
+    cursor: pointer;
+    background-color: white;
+    border: unset;
+}
+
+
+@media screen and (max-width: 694px) {
+    canvas {
+        width: 500px;
+        height: 761px;
+    }
+}
+@media screen and (max-width: 504px) {
+    canvas {
+        width: 400px;
+        height: 616px;
+    }
+}
+@media screen and (max-width: 398px) {
+    canvas {
+        width: 100%;
+        height: 526px;
+    }
+}
+@media screen and (max-width: 350px) {
+    canvas {
+        width: 100%;
+        height: 400px;
+    }
+}
