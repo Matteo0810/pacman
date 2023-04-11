@@ -21,6 +21,8 @@ class Ghost extends Player {
 
     goToHome() {
         this.setToInitialPosition();
+        this.setVelocityX(0);
+        this.setVelocityY(0);
         this.goOut();
     }
 

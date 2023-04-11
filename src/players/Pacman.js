@@ -6,11 +6,9 @@ class Pacman extends Player {
         this.setControllers();
 
         this._action = DIRECTION_RIGHT;
-        this._angle = 0;
-        this._mouthOpen = false;
-        setInterval(() => {
-            this._mouthOpen = !this._mouthOpen;
-        }, 2e2);
+        this._radians = .75;
+        this._openRate = .12;
+        this._rotation = 0;
     }
 
     setControllers() {
@@ -48,6 +46,22 @@ class Pacman extends Player {
                 this._action = DIRECTION_RIGHT;
             }
         }, false);
+    }
+
+    update(context) {
+        if(this.getVelocityX() > 0)
+            this._rotation = 0;
+        else if(this.getVelocityY() > 0)
+            this._rotation = Math.PI/2;
+        else if(this.getVelocityX() < 0)
+            this._rotation = Math.PI;
+        else if(this.getVelocityY() < 0)
+            this._rotation = Math.PI*1.5;
+
+        super.update(context);
+        if(this._radians < 0 || this._radians > .75)
+            this._openRate = -this._openRate;
+        this._radians += this._openRate;
     }
 
     move() {
@@ -91,11 +105,23 @@ class Pacman extends Player {
     }
 
     draw(context) {
+        context.save();
+        context.translate(this.getX(), this.getY());
+        context.rotate(this._rotation);
+        context.translate(-this.getX(), -this.getY());
         context.beginPath();
-        context.arc(this.getX(), this.getY(), this.getRadius(), 0, Math.PI*2);
+        context.arc(
+            this.getX(),
+            this.getY(),
+            this.getRadius(),
+            this._radians,
+            Math.PI * 2 - this._radians
+        )
+        context.lineTo(this.getX(), this.getY());
         screen.useColor("yellow");
         context.fill();
         context.closePath();
+        context.restore();
     }
 
 }

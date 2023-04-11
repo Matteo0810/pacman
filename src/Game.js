@@ -8,6 +8,7 @@ let level;
 let life;
 let isDead;
 let ghostKilled;
+let previousPowerUpId = null;
 
 function initGame() {
     pacman.setToInitialPosition();
@@ -64,7 +65,9 @@ function update() {
             if(dot.getType() === "power-up") {
                 ghosts.forEach(ghost => ghost.setVulnerable(true));
                 ghostKilled = [];
-                setTimeout(() => {
+                if(previousPowerUpId)
+                    clearTimeout(previousPowerUpId);
+                previousPowerUpId = setTimeout(() => {
                     ghosts.forEach(ghost => ghost.setVulnerable(false));
                     ghostKilled = [];
                 }, POWER_UP_DURATION);
