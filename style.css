@@ -40,7 +40,7 @@ form {
 }
 form>input[type="email"] {
     padding: 12px 14px;
-    font-size: .7em;
+    font-size: .9em;
 
     border: 2px solid white;
     color: white;
@@ -50,7 +50,7 @@ form>input[type="email"] {
     font-family: "pacfont", sans-serif;
 }
 form>input[type="email"]::placeholder {
-    font-size: .6em;
+    font-size: .9em;
 }
 form>button {
     font-family: "pacfont", sans-serif;

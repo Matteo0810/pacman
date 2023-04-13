@@ -137,16 +137,16 @@ map.forEach((row, i) => {
                 pacman = new Pacman(j, i);
                 break;
             case "r":
-                ghosts.push(new Ghost(j, i, COLORS.RED));
+                ghosts.push(new Ghost(j, i, COLOR.BLUE));
                 break;
             case "pi":
-                ghosts.push(new Ghost(j, i, COLORS.PINK));
+                ghosts.push(new Ghost(j, i, COLOR.PINK));
                 break;
             case "bl":
-                ghosts.push(new Ghost(j, i, COLORS.BLUE));
+                ghosts.push(new Ghost(j, i, COLOR.GREEN));
                 break;
             case "o":
-                ghosts.push(new Ghost(j, i, COLORS.ORANGE));
+                ghosts.push(new Ghost(j, i, COLOR.ORANGE));
                 break;
             case ".":
                 dots.push(new Dot(j, i));

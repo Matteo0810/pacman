@@ -1,6 +1,7 @@
-const MAX_LIFE = 0;
+const MAX_LIFE = 1;
 const MAX_SCORE = 10_000;
-const POWER_UP_DURATION = 30e3; // 30 seconds
+const POWER_UP_DURATION = 15e3; // 15 seconds
+const LOGO = createImage("src/assets/logo.jpg");
 
 let score;
 let cpt;
@@ -10,12 +11,11 @@ let isDead;
 let ghostKilled;
 let previousPowerUpId = null;
 
+let opacity = 1;
+
 function initGame() {
     pacman.setToInitialPosition();
-    ghosts.forEach(ghost => {
-        ghost.setToInitialPosition();
-        ghost.goOut();
-    });
+    ghosts.forEach(ghost => ghost.goToHome());
     level=1;
     score=0;
     life=MAX_LIFE;
@@ -32,6 +32,29 @@ function initGame() {
 function isLevelFinished() {
     return dots.length < 1;
 }
+
+function drawBeforeGame() {
+    const size = 300;
+    const {width, height} = screen.getCanvas();
+    const context = screen.getContext();
+
+    if(opacity > 0) {
+        opacity-=0.02;
+        screen.setBackground(COLOR.DARK_STYLE);
+        context.globalAlpha = opacity;
+        context.drawImage(LOGO,
+            (width/2)-150,
+            (height/2)-180,
+            size, size
+        );
+    } else {
+        context.globalAlpha = 1;
+        initGame();
+        return;
+    }
+    requestAnimationFrame(drawBeforeGame);
+}
+
 function drawHeader() {
     screen.drawText(`Niveau ${level}`, 15, "white", 100, 30);
     screen.drawText(`Score ${score < 10 ? `0${score}` : score}`, 15, "white", 130,  55);
@@ -43,15 +66,15 @@ function drawLevel() {
     const context = screen.getContext();
     const gameElements = [...boundaries, ...dots];
 
-    screen.setBackground("black");
+    screen.setBackground(COLOR.DARK_STYLE);
     gameElements.forEach(element => element.draw(context));
     ghosts.forEach(ghost => ghost.draw(context));
     pacman.draw(context);
 }
 
 function drawEnd() {
-    screen.setBackground("black");
-    screen.drawText(`Score final: ${score}`, 25, "white", 120, 370);
+    screen.setBackground(COLOR.DARK_STYLE);
+    screen.drawText(`Score final: ${score} points`, 25, "white", 120, 370);
 
     createForm();
 }
@@ -104,6 +127,7 @@ function start() {
         level++;
         dots = [...originalDots];
         pacman.setToInitialPosition();
+        ghosts.forEach(ghost => ghost.goToHome());
         start();
         return;
     } else if(isDead) {
@@ -112,22 +136,22 @@ function start() {
             return;
         }
         pacman.setToInitialPosition();
-        ghosts.forEach(ghost => ghost.setToInitialPosition());
+        ghosts.forEach(ghost => ghost.goToHome());
         life--;
         isDead = false;
 
         start();
         return;
     }
-    requestAnimationFrame(start);
 
     if(cpt >= MAX_SCORE && life < MAX_LIFE) {
         cpt = 0;
         life++;
     }
 
-    drawLevel();
     drawHeader();
+    drawLevel();
 
     update();
+    requestAnimationFrame(start);
 }

@@ -28,13 +28,13 @@ class Ghost extends Player {
 
     goOut() {
         this._isGoingOut = true;
-        if(this._color === COLORS.RED ||this._color === COLORS.ORANGE) {
+        if(this._color === COLOR.BLUE ||this._color === COLOR.ORANGE) {
             this.setVelocityY(-this.getSpeed());
             setTimeout(() => {
                 this.setVelocityY(0);
                 this._isGoingOut = false;
             }, 420);
-        } else if(this._color === COLORS.PINK) {
+        } else if(this._color === COLOR.PINK) {
             this.setVelocityX(-this.getSpeed());
             setTimeout(() => {
                 this.setVelocityX(0);
@@ -44,7 +44,7 @@ class Ghost extends Player {
                     this._isGoingOut = false;
                 }, 420);
             }, 300);
-        } else if(this._color === COLORS.BLUE) {
+        } else if(this._color === COLOR.GREEN) {
             this.setVelocityX(this.getSpeed());
             setTimeout(() => {
                 this.setVelocityX(0);
@@ -155,7 +155,7 @@ class Ghost extends Player {
     draw(context) {
         context.beginPath();
         context.arc(this.getX(), this.getY(), this.getRadius(), 0, Math.PI*2);
-        screen.useColor(this.isVulnerable() ? "#2121ff" : this._color);
+        screen.useColor(this.isVulnerable() ? COLOR.GREY : this._color);
         context.fill();
         context.closePath();
     }

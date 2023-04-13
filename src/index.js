@@ -1,2 +1,2 @@
 const screen = new CanvasScreen();
-initGame();
+drawBeforeGame();
