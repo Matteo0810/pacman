@@ -44,9 +44,6 @@ canvas {
 
 form {
     position: absolute;
-    top: 35%;
-    left: 25%;
-
     width: 17em;
 }
 form>input[type="email"] {
