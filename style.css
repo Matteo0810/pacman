@@ -45,6 +45,7 @@ canvas {
 form {
     position: absolute;
     top: 35%;
+    left: 25%;
 
     width: 17em;
 }
@@ -72,6 +73,7 @@ form>button {
     cursor: pointer;
     background-color: white;
     border: unset;
+    color: #1d1635;
 }
 
 @media screen and (max-width: 613px) {
