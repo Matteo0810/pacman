@@ -20,10 +20,15 @@ class Ghost extends Player {
     }
 
     goToHome() {
+        this.setVulnerable(false);
         this.setToInitialPosition();
         this.setVelocityX(0);
         this.setVelocityY(0);
         this.goOut();
+    }
+
+    isGoingOut() {
+        return this._isGoingOut;
     }
 
     goOut() {

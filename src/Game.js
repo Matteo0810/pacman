@@ -1,6 +1,6 @@
 const MAX_LIFE = 1;
 const MAX_SCORE = 10_000;
-const POWER_UP_DURATION = 15e3; // 15 seconds
+const POWER_UP_DURATION = 8e3; // 8 seconds
 const LOGO = createImage("src/assets/logo.jpg");
 
 let score;
@@ -74,8 +74,6 @@ function drawLevel() {
 
 function drawEnd() {
     screen.setBackground(COLOR.DARK_STYLE);
-    screen.drawText(`Score final: ${score} points`, 25, "white", 120, 370);
-
     createForm();
 }
 
@@ -149,8 +147,8 @@ function start() {
         life++;
     }
 
-    drawHeader();
     drawLevel();
+    drawHeader();
 
     update();
     requestAnimationFrame(start);

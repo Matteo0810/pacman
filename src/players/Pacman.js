@@ -65,8 +65,6 @@ class Pacman extends Player {
     }
 
     move() {
-        this.setVelocityY(0);
-        this.setVelocityX(0);
         const VELOCITY = this.getSpeed();
 
         if(this._action === DIRECTION_RIGHT) {
@@ -76,6 +74,7 @@ class Pacman extends Player {
                     break;
                 } else
                     this.setVelocityX(VELOCITY);
+                this.setVelocityY(0);
             }
         } else if(this._action === DIRECTION_LEFT) {
             for(const boundary of boundaries) {
@@ -84,6 +83,7 @@ class Pacman extends Player {
                     break;
                 } else
                     this.setVelocityX(-VELOCITY);
+                this.setVelocityY(0);
             }
         } else if(this._action === DIRECTION_DOWN) {
             for(const boundary of boundaries) {
@@ -92,6 +92,7 @@ class Pacman extends Player {
                     break;
                 } else
                     this.setVelocityY(VELOCITY);
+                this.setVelocityX(0);
             }
         } else if(this._action === DIRECTION_UP) {
             for(const boundary of boundaries) {
@@ -100,6 +101,7 @@ class Pacman extends Player {
                     break;
                 } else
                     this.setVelocityY(-VELOCITY);
+                this.setVelocityX(0);
             }
         }
     }

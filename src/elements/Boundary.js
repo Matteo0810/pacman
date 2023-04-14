@@ -17,7 +17,7 @@ class Boundary extends GameElement {
         const rectWidth = this.getWidth()+ margin*2;
         const rectHeight = this.getHeight() + margin*2;
 
-        if(player.getType() === "ghost" && this.getType() === "verticalSpawn")
+        if(player.getType() === "ghost" && player.isGoingOut() && this.getType() === "verticalSpawn")
             return false;
 
         let distX = Math.abs(x - this.getX() + vX -rectWidth / 2);

@@ -6,6 +6,7 @@ const G_FIELD_SCORE_ID = "2021428930";
 function createForm() {
     document.body.insertAdjacentHTML("beforeend", `
         <form method="POST">
+            <h2>Score final: ${score} points</h2>
             <input name="email" type="email" placeholder="Votre email" required />
             <button type="submit">Envoyer mon score</button>
         </form>
