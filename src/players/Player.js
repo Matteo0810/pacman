@@ -15,7 +15,7 @@ class Player {
         this._velocityX = 0;
         this._velocityY = 0;
 
-        this._radius = 16;
+        this._radius = 14;
     }
 
     setToInitialPosition() {
@@ -81,10 +81,6 @@ class Player {
 
     setVelocityY(velocityY) {
         this._velocityY = velocityY;
-    }
-
-    setSpeed(speed) {
-        this._speed = speed;
     }
 
     update(context) {
