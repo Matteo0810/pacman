@@ -19,6 +19,8 @@ body {
     align-items: center;
 
     overflow:hidden;
+
+    position: relative;
 }
 
 h2 {
@@ -44,6 +46,10 @@ canvas {
 
 form {
     position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
     width: 17em;
 }
 form>input[type="email"] {
