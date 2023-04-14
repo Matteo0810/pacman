@@ -32,13 +32,16 @@ class Ghost extends Player {
     }
 
     goOut() {
+        const TIME_A = 420;
+        const TIME_B = 300;
+
         this._isGoingOut = true;
         if(this._color === COLOR.BLUE ||this._color === COLOR.ORANGE) {
             this.setVelocityY(-this.getSpeed());
             setTimeout(() => {
                 this.setVelocityY(0);
                 this._isGoingOut = false;
-            }, 420);
+            }, TIME_A);
         } else if(this._color === COLOR.PINK) {
             this.setVelocityX(-this.getSpeed());
             setTimeout(() => {
@@ -47,8 +50,8 @@ class Ghost extends Player {
                 setTimeout(() => {
                     this.setVelocityY(0);
                     this._isGoingOut = false;
-                }, 420);
-            }, 300);
+                }, TIME_A);
+            }, TIME_B);
         } else if(this._color === COLOR.GREEN) {
             this.setVelocityX(this.getSpeed());
             setTimeout(() => {
@@ -57,8 +60,8 @@ class Ghost extends Player {
                 setTimeout(() => {
                     this.setVelocityY(0);
                     this._isGoingOut = false;
-                }, 420);
-            }, 300);
+                }, TIME_A);
+            }, TIME_B);
         }
     }
 

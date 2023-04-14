@@ -15,7 +15,7 @@ class Player {
         this._velocityX = 0;
         this._velocityY = 0;
 
-        this._radius = 15;
+        this._radius = 16;
     }
 
     setToInitialPosition() {

@@ -9,7 +9,7 @@ class Boundary extends GameElement {
 
     collideWith(player, velocity) {
         const [vX, vY] = velocity;
-        const margin = 1;
+        const margin = .5;
         const x = player.getX();
         const y = player.getY();
         const radius = player.getRadius();

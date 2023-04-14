@@ -6,6 +6,8 @@ class Pacman extends Player {
         this.setControllers();
 
         this._action = DIRECTION_RIGHT;
+        this._lastAction = this._action;
+
         this._radians = .75;
         this._openRate = .12;
         this._rotation = 0;
@@ -22,7 +24,6 @@ class Pacman extends Player {
 
             const distanceX = endX - startX;
             const distanceY = endY - startY;
-
             if (Math.abs(distanceX) > Math.abs(distanceY)) {
                 if (distanceX > 0)
                     this._action = DIRECTION_RIGHT;
@@ -67,42 +68,45 @@ class Pacman extends Player {
     move() {
         const VELOCITY = this.getSpeed();
 
-        if(this._action === DIRECTION_RIGHT) {
-            for(const boundary of boundaries) {
-                if(boundary.collideWith(this, [VELOCITY, 0])) {
-                    this.setVelocityX(0);
-                    break;
-                } else
-                    this.setVelocityX(VELOCITY);
-                this.setVelocityY(0);
+        let targetVelocityX = 0;
+        let targetVelocityY = 0;
+
+        if (this._action === DIRECTION_RIGHT) {
+            targetVelocityX = VELOCITY;
+            targetVelocityY = 0;
+        } else if (this._action === DIRECTION_LEFT) {
+            targetVelocityX = -VELOCITY;
+            targetVelocityY = 0;
+        } else if (this._action === DIRECTION_DOWN) {
+            targetVelocityX = 0;
+            targetVelocityY = VELOCITY;
+        } else if (this._action === DIRECTION_UP) {
+            targetVelocityX = 0;
+            targetVelocityY = -VELOCITY;
+        }
+
+        let canMoveX = true;
+        let canMoveY = true;
+
+        for (const boundary of boundaries) {
+            if (targetVelocityX !== 0 && boundary.collideWith(this, [targetVelocityX, 0])) {
+                canMoveX = false;
             }
-        } else if(this._action === DIRECTION_LEFT) {
-            for(const boundary of boundaries) {
-                if(boundary.collideWith(this, [-VELOCITY, 0])) {
-                    this.setVelocityX(0);
-                    break;
-                } else
-                    this.setVelocityX(-VELOCITY);
-                this.setVelocityY(0);
+            if (targetVelocityY !== 0 && boundary.collideWith(this, [0, targetVelocityY])) {
+                canMoveY = false;
             }
-        } else if(this._action === DIRECTION_DOWN) {
-            for(const boundary of boundaries) {
-                if(boundary.collideWith(this, [0, VELOCITY])) {
-                    this.setVelocityY(0);
-                    break;
-                } else
-                    this.setVelocityY(VELOCITY);
-                this.setVelocityX(0);
-            }
-        } else if(this._action === DIRECTION_UP) {
-            for(const boundary of boundaries) {
-                if(boundary.collideWith(this, [0, -VELOCITY])) {
-                    this.setVelocityY(0);
-                    break;
-                } else
-                    this.setVelocityY(-VELOCITY);
-                this.setVelocityX(0);
-            }
+        }
+
+        if (canMoveX) {
+            this.setVelocityX(targetVelocityX);
+        } else {
+            this.setVelocityX(0);
+        }
+
+        if (canMoveY) {
+            this.setVelocityY(targetVelocityY);
+        } else {
+            this.setVelocityY(0);
         }
     }
 
