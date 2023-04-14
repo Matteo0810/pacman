@@ -9,8 +9,11 @@ function createForm() {
             <h2>Score final: ${score} points</h2>
             <input name="email" type="email" placeholder="Votre email" required />
             <button type="submit">Envoyer mon score</button>
+            <button id="play-again">Rejouer</button>
         </form>
     `);
+
+    document.getElementById("play-again").onclick = initGame;
 
     document.querySelector("form")
         .onsubmit = async event => {

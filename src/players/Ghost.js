@@ -32,7 +32,7 @@ class Ghost extends Player {
     }
 
     goOut() {
-        const TIME_A = 425;
+        const TIME_A = 430;
         const TIME_B = 300;
 
         this._isGoingOut = true;
@@ -40,7 +40,7 @@ class Ghost extends Player {
             this.setVelocityY(-this.getSpeed());
             setTimeout(() => {
                 this.setVelocityY(0);
-                this.setVelocityX(-this.getSpeed());
+                this._action = DIRECTION_LEFT;
                 this._isGoingOut = false;
             }, TIME_A);
         } else if(this._color === COLOR.PINK) {
@@ -50,7 +50,7 @@ class Ghost extends Player {
                 this.setVelocityY(-this.getSpeed());
                 setTimeout(() => {
                     this.setVelocityY(0);
-                    this.setVelocityX(this.getSpeed());
+                    this._action = DIRECTION_LEFT;
                     this._isGoingOut = false;
                 }, TIME_A);
             }, TIME_B);
@@ -61,7 +61,7 @@ class Ghost extends Player {
                 this.setVelocityY(-this.getSpeed());
                 setTimeout(() => {
                     this.setVelocityY(0);
-                    this.setVelocityX(this.getSpeed());
+                    this._action = DIRECTION_LEFT;
                     this._isGoingOut = false;
                 }, TIME_A);
             }, TIME_B);

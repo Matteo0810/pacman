@@ -13,6 +13,11 @@ class Pacman extends Player {
         this._rotation = 0;
     }
 
+    setToInitialPosition() {
+        super.setToInitialPosition();
+        this._action = DIRECTION_RIGHT;
+    }
+
     setControllers() {
         window.addEventListener("touchstart", event => {
             startX = event.touches[0].pageX;
