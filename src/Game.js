@@ -16,6 +16,7 @@ let opacity = 1;
 function initGame() {
     pacman.setToInitialPosition();
     ghosts.forEach(ghost => ghost.goToHome());
+    dots = [...originalDots];
     level=1;
     score=0;
     life=MAX_LIFE;
@@ -137,9 +138,6 @@ function start() {
         ghosts.forEach(ghost => ghost.goToHome());
         life--;
         isDead = false;
-
-        start();
-        return;
     }
 
     if(cpt >= MAX_SCORE && life < MAX_LIFE) {
