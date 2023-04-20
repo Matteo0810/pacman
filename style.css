@@ -35,7 +35,8 @@ p {
     color: white;
 
     text-align: center;
-    margin-top: 11px;
+    margin-top: -30px;
+    margin-bottom: 10px;
 }
 
 canvas {
@@ -51,6 +52,9 @@ form {
 
     transform: translate(-50%, -50%);
     width: 17em;
+}
+form>h2 {
+    text-align: center;
 }
 form>input[type="email"] {
     padding: 10px 10px;
@@ -77,6 +81,13 @@ form>button {
     background-color: white;
     border: unset;
     color: #1d1635;
+}
+
+form>img {
+    width: 50%;
+    display: block;
+    margin: auto;
+    height: 9em;
 }
 
 @media screen and (max-width: 613px) {

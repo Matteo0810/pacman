@@ -61,6 +61,9 @@ function drawHeader() {
     screen.drawText(`Score ${score < 10 ? `0${score}` : score}`, 15, "white", 130,  55);
 
     screen.drawText(`Vies ${life}`, 15, "white", 300, 40);
+
+    const SIZE = 80;
+    screen.getContext().drawImage(LOGO, screen.getCanvas().width-120, -12, SIZE, SIZE);
 }
 
 function drawLevel() {
