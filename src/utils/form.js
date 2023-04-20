@@ -37,7 +37,8 @@ function createForm() {
 
             event.target.insertAdjacentHTML("afterbegin",
                 "<img src=\"src/assets/logo.jpg\" alt=\"logo certideal\" />" +
-                "<p>Votre score a bien été envoyé</p>"
+                "<p>Votre score a bien été envoyé</p>" +
+                "<a href='https://certideal.com/' target='_blank'>Aller sur CertiDeal</a>"
             );
 
             emailField.value = "";

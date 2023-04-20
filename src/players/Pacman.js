@@ -129,7 +129,7 @@ class Pacman extends Player {
             Math.PI * 2 - this._radians
         )
         context.lineTo(this.getX(), this.getY());
-        screen.useColor(COLOR.YELLOW);
+        screen.useColor(COLOR.BLUE);
         context.fill();
         context.closePath();
         context.restore();

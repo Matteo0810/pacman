@@ -39,6 +39,13 @@ p {
     margin-bottom: 10px;
 }
 
+a {
+    font-family: "pacfont", sans-serif;
+    display: block;
+    text-align: center;
+    color: #4CAFF7;
+}
+
 canvas {
     border-radius: 20px;
     position: relative;

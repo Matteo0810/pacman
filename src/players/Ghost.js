@@ -35,7 +35,7 @@ class Ghost extends Player {
         const TIME_B = 300;
 
         this._isGoingOut = true;
-        if(this._color === COLOR.BLUE ||this._color === COLOR.ORANGE) {
+        if(this._color === COLOR.YELLOW ||this._color === COLOR.ORANGE) {
             this.setVelocityY(-this.getSpeed());
             setTimeout(() => {
                 this.setVelocityY(0);
